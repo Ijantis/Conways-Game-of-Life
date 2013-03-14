@@ -4,22 +4,26 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import Map.Grid;
+
 public class GuiMain extends JFrame {
 
-	MapDisplay mapDisplay;
+	MapDisplay mapDisplay; // JPanel
 
-	public GuiMain() {
+	public GuiMain(Grid myGrid) {
 		super("Life Simulation");
 
-		initialiseMap();
+		initialiseMap(myGrid);
 		new ArrangeGui(this);
 		initialiseFrame();
 	}
 
-	private void initialiseMap() {
+	private void initialiseMap(Grid myGrid) {
 
 		mapDisplay = new MapDisplay();
-		mapDisplay.setPreferredSize(new Dimension(200, 200));
+		mapDisplay.setPreferredSize(new Dimension(myGrid.getWidth(), myGrid
+				.getHeight()));
+		mapDisplay.updateMap(myGrid);
 
 	}
 
