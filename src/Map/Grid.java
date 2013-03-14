@@ -61,6 +61,14 @@ public class Grid {
 		return counter;
 	}
 
+	/**
+	 * 
+	 * Goes through every cell and based on a given percentage turns that cell
+	 * into a live cell. If the cell is already alive then no change is made.
+	 * 
+	 * @param percentage
+	 *            - Chance that a cell is made into a live cell.
+	 */
 	public void addRandomLiveCells(double percentage) {
 
 		percentage = (int) percentage;
