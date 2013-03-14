@@ -23,10 +23,10 @@ public class MapDisplay extends JPanel {
 			for (int y = 0; y < data.getHeight(); y++) {
 				if (data.getCellValue(x, y) == Cell.Dead) {
 					g.setColor(Color.white);
-					g.fillRect(x * 2, y * 2, 2, 2);
+					g.fillRect(x * 4, y * 4, 4, 4);
 				} else {
 					g.setColor(Color.black);
-					g.fillRect(x * 2, y * 2, 2, 2);
+					g.fillRect(x * 4, y * 4, 4, 4);
 				}
 			}
 		}
@@ -35,6 +35,7 @@ public class MapDisplay extends JPanel {
 
 	public void updateMap(Grid data) {
 		MapDisplay.data = data;
+		this.repaint();
 	}
 
 }
