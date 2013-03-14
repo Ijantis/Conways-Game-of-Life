@@ -4,7 +4,7 @@ public class Grid {
 
 	private int width;
 	private int height;
-	private Cell[][] data;
+	private static Cell[][] data;
 
 	public Grid(int height, int width) {
 
@@ -49,5 +49,9 @@ public class Grid {
 		}
 
 		return counter;
+	}
+
+	public static Cell[][] getData() {
+		return data;
 	}
 }
