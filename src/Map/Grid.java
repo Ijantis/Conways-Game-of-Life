@@ -38,4 +38,16 @@ public class Grid {
 		data[x][y].setValue(value);
 	}
 
+	public int getCellTypeCount(int value) {
+		int counter = 0;
+		for (int i = 0; i < data.length; i++) {
+			for (int j = 0; j < data[0].length; j++) {
+				if (data[i][j].getCellValue() == value) {
+					counter++;
+				}
+			}
+		}
+
+		return counter;
+	}
 }
