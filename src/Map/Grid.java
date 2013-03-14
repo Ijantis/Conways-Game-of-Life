@@ -14,6 +14,14 @@ public class Grid {
 
 	}
 
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
 	private void initialiseMapData() {
 		data = new Cell[this.width][this.height];
 
@@ -30,11 +38,11 @@ public class Grid {
 
 	}
 
-	public int getValue(int x, int y) {
+	public int getCellValue(int x, int y) {
 		return data[x][y].getCellValue();
 	}
 
-	public void setValue(int x, int y, int value) {
+	public void setCellValue(int x, int y, int value) {
 		data[x][y].setValue(value);
 	}
 
@@ -51,7 +59,4 @@ public class Grid {
 		return counter;
 	}
 
-	public static Cell[][] getData() {
-		return data;
-	}
 }
