@@ -8,7 +8,7 @@ import Map.Grid;
 
 public class GuiMain extends JFrame {
 
-	MapDisplay mapDisplay; // JPanel
+	public static MapDisplay mapDisplay; // JPanel
 
 	public GuiMain(Grid myGrid) {
 		super("Life Simulation");
@@ -21,8 +21,8 @@ public class GuiMain extends JFrame {
 	private void initialiseMap(Grid myGrid) {
 
 		mapDisplay = new MapDisplay();
-		mapDisplay.setPreferredSize(new Dimension(myGrid.getWidth() * 2, myGrid
-				.getHeight() * 2));
+		mapDisplay.setPreferredSize(new Dimension(myGrid.getWidth() * 4, myGrid
+				.getHeight() * 4));
 		mapDisplay.updateMap(myGrid);
 
 	}
