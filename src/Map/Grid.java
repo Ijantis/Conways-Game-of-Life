@@ -1,5 +1,7 @@
 package Map;
 
+import java.util.Random;
+
 public class Grid {
 
 	private int width;
@@ -57,6 +59,19 @@ public class Grid {
 		}
 
 		return counter;
+	}
+
+	public void addRandomLiveCells(double percentage) {
+
+		percentage = (int) percentage;
+		Random myRandom = new Random();
+		for (int x = 0; x < getWidth(); x++) {
+			for (int y = 0; y < getWidth(); y++) {
+				if (myRandom.nextInt(100) + 1 < percentage) {
+					setCellValue(x, y, Cell.Alive);
+				}
+			}
+		}
 	}
 
 }
