@@ -42,18 +42,6 @@ public class ArrangeGui {
 	private void createStartStop() {
 
 		splitPane.add(mainPanel);
-		JButton pauseButton = new JButton("Pause");
-		pauseButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				Main.Main.isPaused = true;
-
-			}
-		});
-		mainPanel.add(pauseButton);
-		
 		
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() {
@@ -65,9 +53,20 @@ public class ArrangeGui {
 
 			}
 		});
-
 		mainPanel.add(startButton);
-		
+
+		JButton pauseButton = new JButton("Pause");
+		pauseButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				Main.Main.isPaused = true;
+
+			}
+		});
+		mainPanel.add(pauseButton);
+
 	}
 
 	@SuppressWarnings({ "unused" })
