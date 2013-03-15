@@ -1,5 +1,13 @@
 package Gui;
 
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
 /**
  * 
  * @author philip
@@ -12,23 +20,54 @@ package Gui;
 public class ArrangeGui {
 
 	GuiMain guiMain;
+	JPanel mainPanel;
+	JSplitPane splitPane;
 
 	public ArrangeGui(GuiMain guiMain) {
 
 		this.guiMain = guiMain;
+		mainPanel = new JPanel(new GridLayout(20, 1));
+		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		guiMain.add(splitPane);
 		createMapArea();
-		createButtonArea();
+		createStartStop();
 
 	}
 
 	private void createMapArea() {
-		guiMain.add(guiMain.mapDisplay);
+		splitPane.add(guiMain.mapDisplay);
 
 	}
 
-	private void createButtonArea() {
-		// TODO Auto-generated method stub
+	private void createStartStop() {
 
+		splitPane.add(mainPanel);
+		JButton pauseButton = new JButton("Pause");
+		pauseButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				Main.Main.isPaused = true;
+
+			}
+		});
+		mainPanel.add(pauseButton);
+		
+		
+		JButton startButton = new JButton("Start");
+		startButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				Main.Main.isPaused = false;
+
+			}
+		});
+
+		mainPanel.add(startButton);
+		
 	}
 
 	@SuppressWarnings({ "unused" })

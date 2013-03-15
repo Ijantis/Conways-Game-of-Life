@@ -12,6 +12,7 @@ import Map.Grid;
 
 public class Main implements Runnable {
 
+	public static boolean isPaused = false;
 	private static Grid myGrid;
 	private static GuiMain gui;
 	private static Stack<Coordinate> toBeRevived = new Stack<Coordinate>();
@@ -21,7 +22,11 @@ public class Main implements Runnable {
 
 		myGrid = new Grid(200, 200);
 
-		myGrid.addRandomLiveCells(70);
+		myGrid.setCellValue(100, 100, Cell.Alive);
+		myGrid.setCellValue(101, 101, Cell.Alive);
+		myGrid.setCellValue(101, 102, Cell.Alive);
+		myGrid.setCellValue(100, 101, Cell.Alive);
+		myGrid.setCellValue(99, 101, Cell.Alive);
 
 		gui = new GuiMain(myGrid);
 
@@ -39,11 +44,14 @@ public class Main implements Runnable {
 	public void run() {
 
 		while (true) {
-			calculateCellsToUpdate();
-			updateCells();
-			updateGraphics();
-			pauseProgram(100);
-
+			if (isPaused) {
+				pauseProgram(10);
+			} else {
+				calculateCellsToUpdate();
+				updateCells();
+				updateGraphics();
+				pauseProgram(10);
+			}
 		}
 
 	}
