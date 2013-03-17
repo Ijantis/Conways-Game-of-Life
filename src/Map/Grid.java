@@ -16,10 +16,20 @@ public class Grid {
 
 	}
 
+	/**
+	 * Returns the current width of the map.
+	 * 
+	 * @return width - The width of the map along the x-axis
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Returns the current height of the map.
+	 * 
+	 * @return height - The height of the map along the y-axis
+	 */
 	public int getHeight() {
 		return height;
 	}
