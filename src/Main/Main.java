@@ -12,9 +12,10 @@ import Map.Grid;
 
 public class Main implements Runnable {
 
-	public static boolean isPaused = false;
+	public static boolean isPaused = true;
 	private static Grid myGrid;
 	private static GuiMain gui;
+	private static int speed = 10;
 	private static Stack<Coordinate> toBeRevived = new Stack<Coordinate>();
 	private static Stack<Coordinate> toBeKilled = new Stack<Coordinate>();
 
@@ -50,7 +51,7 @@ public class Main implements Runnable {
 				calculateCellsToUpdate();
 				updateCells();
 				updateGraphics();
-				pauseProgram(10);
+				pauseProgram(Main.speed);
 			}
 		}
 
@@ -145,6 +146,20 @@ public class Main implements Runnable {
 			Thread.sleep(i);
 		} catch (InterruptedException e) {
 			System.exit(1);
+		}
+
+	}
+
+	/**
+	 * @param speed
+	 *            the speed to set
+	 */
+	public static void getSpeed(int speed) {
+
+		if (!(Main.speed + speed < 10 || Main.speed + speed > 200)) {
+
+			Main.speed += speed;
+			System.out.println(Main.speed);
 		}
 
 	}

@@ -23,15 +23,41 @@ public class ArrangeGui {
 	JPanel mainPanel;
 	JSplitPane splitPane;
 
-	public ArrangeGui(GuiMain guiMain) {
+	protected ArrangeGui(GuiMain guiMain) {
 
 		this.guiMain = guiMain;
 		mainPanel = new JPanel(new GridLayout(20, 1));
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		guiMain.add(splitPane);
+
 		createMapArea();
 		createStartStop();
+		createSpeedButtons();
 
+	}
+
+	private void createSpeedButtons() {
+
+		JButton faster = new JButton("Faster");
+		faster.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Main.Main.getSpeed(-10);
+			}
+		});
+
+		JButton slower = new JButton("Slower");
+		slower.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Main.Main.getSpeed(10);
+			}
+		});
+
+		mainPanel.add(faster);
+		mainPanel.add(slower);
 	}
 
 	private void createMapArea() {
@@ -42,7 +68,7 @@ public class ArrangeGui {
 	private void createStartStop() {
 
 		splitPane.add(mainPanel);
-		
+
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() {
 
