@@ -1,6 +1,7 @@
 package Main;
 
 import java.io.ObjectInputStream.GetField;
+import java.util.EmptyStackException;
 import java.util.Random;
 import java.util.Stack;
 
@@ -18,6 +19,7 @@ public class Main implements Runnable {
 	private static int speed = 10;
 	private static Stack<Coordinate> toBeRevived = new Stack<Coordinate>();
 	private static Stack<Coordinate> toBeKilled = new Stack<Coordinate>();
+	private static Stack<Grid> frames = new Stack<Grid>();
 
 	public static void main(String[] args) {
 
@@ -28,6 +30,8 @@ public class Main implements Runnable {
 		myGrid.setCellValue(101, 102, Cell.Alive);
 		myGrid.setCellValue(100, 101, Cell.Alive);
 		myGrid.setCellValue(99, 101, Cell.Alive);
+
+		addFrame();
 
 		gui = new GuiMain(myGrid);
 
@@ -50,6 +54,7 @@ public class Main implements Runnable {
 			} else {
 				calculateCellsToUpdate();
 				updateCells();
+				addFrame();
 				updateGraphics();
 				pauseProgram(Main.speed);
 			}
@@ -57,7 +62,38 @@ public class Main implements Runnable {
 
 	}
 
-	private void updateCells() {
+	private static void addFrame() {
+
+		frames.add(myGrid);
+		System.out.println("Added");
+		System.out.println(myGrid.getCellTypeCount(Cell.Alive));
+
+	}
+
+	public static void nextFrame() {
+
+		calculateCellsToUpdate();
+		updateCells();
+		addFrame();
+		updateGraphics();
+		System.out.println("next");
+
+	}
+
+	public static void previousFrame() {
+
+		try {
+			myGrid = frames.pop();
+			// System.out.println(myGrid.getCellTypeCount(Cell.Alive));
+			updateGraphics();
+			System.out.println("prev");
+
+		} catch (EmptyStackException e) {
+		}
+
+	}
+
+	private static void updateCells() {
 		Coordinate temp;
 
 		while (!toBeRevived.isEmpty()) {
@@ -72,9 +108,10 @@ public class Main implements Runnable {
 
 	}
 
-	private void updateGraphics() {
+	private static void updateGraphics() {
 
-		gui.mapDisplay.updateMap(myGrid);
+		// System.out.println(myGrid.getCellTypeCount(Cell.Alive));
+		GuiMain.mapDisplay.updateMap(myGrid);
 
 	}
 
@@ -88,7 +125,7 @@ public class Main implements Runnable {
 	/**
 	 * 
 	 */
-	private void calculateCellsToUpdate() {
+	private static void calculateCellsToUpdate() {
 
 		int value;
 		int neighbours;
@@ -154,24 +191,13 @@ public class Main implements Runnable {
 	 * @param speed
 	 *            the speed to set
 	 */
-	public static void getSpeed(int speed) {
+	public static void setSpeed(int speed) {
 
 		if (!(Main.speed + speed < 10 || Main.speed + speed > 200)) {
 
 			Main.speed += speed;
-			System.out.println(Main.speed);
 		}
 
-	}
-
-	public class Coordinate {
-		int x;
-		int y;
-
-		private Coordinate(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
 	}
 
 }

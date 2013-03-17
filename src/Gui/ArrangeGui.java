@@ -1,5 +1,6 @@
 package Gui;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,8 @@ public class ArrangeGui {
 	GuiMain guiMain;
 	JPanel mainPanel;
 	JSplitPane splitPane;
+	private static JButton backward;
+	private static JButton forward;
 
 	protected ArrangeGui(GuiMain guiMain) {
 
@@ -33,6 +36,38 @@ public class ArrangeGui {
 		createMapArea();
 		createStartStop();
 		createSpeedButtons();
+		createFrameButtons();
+
+	}
+
+	private void createFrameButtons() {
+
+		forward = new JButton(">");
+
+		forward.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Main.Main.nextFrame();
+
+			}
+		});
+
+		backward = new JButton("<");
+
+		backward.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main.Main.previousFrame();
+			}
+		});
+
+		JPanel temp = new JPanel(new FlowLayout());
+		temp.add(backward);
+		temp.add(forward);
+		mainPanel.add(temp);
 
 	}
 
@@ -43,7 +78,7 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Main.Main.getSpeed(-10);
+				Main.Main.setSpeed(-10);
 			}
 		});
 
@@ -52,7 +87,7 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Main.Main.getSpeed(10);
+				Main.Main.setSpeed(10);
 			}
 		});
 
@@ -76,6 +111,8 @@ public class ArrangeGui {
 			public void actionPerformed(ActionEvent e) {
 
 				Main.Main.isPaused = false;
+				forward.setEnabled(false);
+				backward.setEnabled(false);
 
 			}
 		});
@@ -88,6 +125,8 @@ public class ArrangeGui {
 			public void actionPerformed(ActionEvent arg0) {
 
 				Main.Main.isPaused = true;
+				forward.setEnabled(true);
+				backward.setEnabled(true);
 
 			}
 		});
