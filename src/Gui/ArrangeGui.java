@@ -96,7 +96,7 @@ public class ArrangeGui {
 	}
 
 	private void createMapArea() {
-		splitPane.add(guiMain.mapDisplay);
+		splitPane.add(GuiMain.mapDisplay);
 
 	}
 
