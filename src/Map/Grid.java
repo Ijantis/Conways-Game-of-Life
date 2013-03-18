@@ -6,15 +6,40 @@ public class Grid {
 
 	private int width;
 	private int height;
-	private static Cell[][] data;
+	private Cell[][] data;
 
+	/**
+	 * Creates a new Grid instance and fills it up with dead cells.
+	 * 
+	 * @param height
+	 *            - Height of the map
+	 * @param width
+	 *            - Width of the map
+	 */
 	public Grid(int height, int width) {
 
 		this.height = height;
 		this.width = width;
-		initialiseMapData();
+		initialiseCells();
 
 	}
+
+	/*
+	 * Copy constructor
+	 */
+	// public Grid(Grid myGrid) {
+	// this.width = myGrid.width;
+	// this.height = myGrid.height;
+	// this.data = new Cell[myGrid.width][myGrid.height];
+	// initialiseCells();
+	//
+	// for (int i = 0; i < data.length; i++) {
+	// for (int j = 0; j < data[0].length; j++) {
+	// this.data[i][j].setValue(myGrid.data[i][j].getCellValue());
+	// }
+	// }
+	//
+	// }
 
 	/**
 	 * Returns the current width of the map.
@@ -34,7 +59,7 @@ public class Grid {
 		return height;
 	}
 
-	private void initialiseMapData() {
+	private void initialiseCells() {
 		data = new Cell[this.width][this.height];
 
 		for (int i = 0; i < data.length; i++) {
