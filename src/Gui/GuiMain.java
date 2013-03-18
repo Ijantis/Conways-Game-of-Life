@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import Map.Grid;
 
+@SuppressWarnings("serial")
 public class GuiMain extends JFrame {
 
 	public static MapDisplay mapDisplay; // JPanel
