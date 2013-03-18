@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import Map.Cell;
 import Map.Grid;
 
+@SuppressWarnings("serial")
 public class MapDisplay extends JPanel {
 
 	private static Grid data;
