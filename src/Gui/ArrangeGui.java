@@ -37,6 +37,24 @@ public class ArrangeGui {
 		createStartStop();
 		createSpeedButtons();
 		createFrameButtons();
+		createResetButton();
+
+	}
+
+	private void createResetButton() {
+
+		JButton resetButton = new JButton("Reset");
+
+		resetButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		mainPanel.add(resetButton);
 
 	}
 
@@ -48,7 +66,7 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				Main.Main.nextFrame();
 
 			}
