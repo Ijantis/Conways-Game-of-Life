@@ -1,11 +1,7 @@
 package Main;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.EmptyStackException;
-import java.util.Random;
 import java.util.Stack;
-
-import javax.swing.JOptionPane;
 
 import Gui.GuiMain;
 import Map.Cell;
@@ -15,11 +11,11 @@ public class Main implements Runnable {
 
 	public static boolean isPaused = true;
 	private static Grid myGrid;
-	private static GuiMain gui;
-	private static int speed = 10;
+	private static int speed = 100;
 	private static Stack<Coordinate> toBeRevived = new Stack<Coordinate>();
 	private static Stack<Coordinate> toBeKilled = new Stack<Coordinate>();
 	private static Stack<Grid> frames = new Stack<Grid>();
+	public static int frameNumber = 0;
 
 	public static void main(String[] args) {
 
@@ -31,10 +27,7 @@ public class Main implements Runnable {
 		myGrid.setCellValue(100, 101, Cell.Alive);
 		myGrid.setCellValue(99, 101, Cell.Alive);
 
-		addFrame();
-
-		gui = new GuiMain(myGrid);
-
+		new GuiMain(myGrid);
 		new Main();
 
 	}
@@ -52,9 +45,9 @@ public class Main implements Runnable {
 			if (isPaused) {
 				pauseProgram(10);
 			} else {
+//				addFrame();
 				calculateCellsToUpdate();
 				updateCells();
-				addFrame();
 				updateGraphics();
 				pauseProgram(Main.speed);
 			}
@@ -62,36 +55,43 @@ public class Main implements Runnable {
 
 	}
 
-	private static void addFrame() {
-
-		frames.add(myGrid);
-		System.out.println("Added");
-		System.out.println(myGrid.getCellTypeCount(Cell.Alive));
-
-	}
+//	private static void addFrame() {
+//
+//		frames.push(new Grid(myGrid));
+//		frameNumber++;
+//		System.out.println("Frame Number : " + frameNumber);
+//		System.out.println("Size : " + frames.size());
+//		System.out.println("Added");
+//		System.out.println(myGrid.getCellTypeCount(Cell.Alive));
+//		System.out.println("Frame number : " + frameNumber);
+//
+//	}
 
 	public static void nextFrame() {
 
+//		addFrame();
 		calculateCellsToUpdate();
 		updateCells();
-		addFrame();
 		updateGraphics();
-		System.out.println("next");
 
 	}
 
-	public static void previousFrame() {
-
-		try {
-			myGrid = frames.pop();
-			// System.out.println(myGrid.getCellTypeCount(Cell.Alive));
-			updateGraphics();
-			System.out.println("prev");
-
-		} catch (EmptyStackException e) {
-		}
-
-	}
+//	public static void previousFrame() {
+//
+//		try {
+//			myGrid = frames.pop();
+//
+//			frameNumber--;
+//			System.out.println("Removed");
+//			System.out.println(myGrid.getCellTypeCount(Cell.Alive));
+//			System.out.println("Frame number : " + frameNumber);
+//
+//			updateGraphics();
+//
+//		} catch (EmptyStackException e) {
+//		}
+//
+//	}
 
 	private static void updateCells() {
 		Coordinate temp;

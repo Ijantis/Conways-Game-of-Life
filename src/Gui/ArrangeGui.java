@@ -72,20 +72,20 @@ public class ArrangeGui {
 			}
 		});
 
-		backward = new JButton("<");
-
-		backward.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Main.Main.previousFrame();
-			}
-		});
-
-		JPanel temp = new JPanel(new FlowLayout());
-		temp.add(backward);
-		temp.add(forward);
-		mainPanel.add(temp);
+		// backward = new JButton("<");
+		//
+		// backward.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		// Main.Main.previousFrame();
+		// }
+		// });
+		//
+		// JPanel temp = new JPanel(new FlowLayout());
+		// temp.add(backward);
+		// temp.add(forward);
+		mainPanel.add(forward);
 
 	}
 
