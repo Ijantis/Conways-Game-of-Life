@@ -37,38 +37,6 @@ public class ArrangeGui {
 		createSpeedButtons();
 		createFrameButtons();
 		createResetButton();
-		createCellEditButton();
-
-	}
-
-	private void createCellEditButton() {
-
-		final JButton createCells = new JButton("Create");
-		final JButton destroyCells = new JButton("Destroy");
-
-		createCells.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				createCells.setEnabled(false);
-				destroyCells.setEnabled(true);
-				MapDisplay.currentCellEdit = Cell.Alive;
-			}
-		});
-
-		destroyCells.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				createCells.setEnabled(true);
-				destroyCells.setEnabled(false);
-				MapDisplay.currentCellEdit = Cell.Dead;
-			}
-		});
-		destroyCells.setEnabled(false);
-
-		mainPanel.add(createCells);
-		mainPanel.add(destroyCells);
 
 	}
 
