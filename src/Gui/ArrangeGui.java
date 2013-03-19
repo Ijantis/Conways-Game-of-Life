@@ -1,6 +1,5 @@
 package Gui;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import Map.Grid;
+import Map.Cell;
 
 /**
  * 
@@ -24,7 +23,7 @@ public class ArrangeGui {
 
 	JPanel mainPanel;
 	JSplitPane splitPane;
-//	private static JButton backward;
+	// private static JButton backward;
 	private static JButton forward;
 
 	protected ArrangeGui(GuiMain guiMain) {
@@ -38,6 +37,38 @@ public class ArrangeGui {
 		createSpeedButtons();
 		createFrameButtons();
 		createResetButton();
+		createCellEditButton();
+
+	}
+
+	private void createCellEditButton() {
+
+		final JButton createCells = new JButton("Create");
+		final JButton destroyCells = new JButton("Destroy");
+
+		createCells.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				createCells.setEnabled(false);
+				destroyCells.setEnabled(true);
+				MapDisplay.currentCellEdit = Cell.Alive;
+			}
+		});
+
+		destroyCells.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				createCells.setEnabled(true);
+				destroyCells.setEnabled(false);
+				MapDisplay.currentCellEdit = Cell.Dead;
+			}
+		});
+		destroyCells.setEnabled(false);
+
+		mainPanel.add(createCells);
+		mainPanel.add(destroyCells);
 
 	}
 

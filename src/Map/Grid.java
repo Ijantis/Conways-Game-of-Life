@@ -117,16 +117,6 @@ public class Grid {
 		}
 	}
 
-	public static void swapCellValue(int x, int y) {
-
-		if (data[x][y].getCellValue() == Cell.Alive) {
-			data[x][y].setValue(Cell.Dead);
-		} else {
-			data[x][y].setValue(Cell.Alive);
-		}
-
-	}
-
 	public void reset() {
 
 		for (int i = 0; i < data.length; i++) {

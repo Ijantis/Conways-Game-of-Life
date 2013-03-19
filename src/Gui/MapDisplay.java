@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
@@ -11,12 +12,15 @@ import Map.Cell;
 import Map.Grid;
 
 @SuppressWarnings("serial")
-public class MapDisplay extends JPanel implements MouseListener {
+public class MapDisplay extends JPanel implements MouseListener,
+		MouseMotionListener {
 
 	protected static Grid data;
+	protected static int currentCellEdit = Cell.Alive;
 
 	public MapDisplay() {
 		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 	@Override
@@ -44,12 +48,8 @@ public class MapDisplay extends JPanel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 
-		System.out.println(arg0.getX() / 4);
-		System.out.println(arg0.getY() / 4);
-
-		Grid.swapCellValue(arg0.getX() / 4, arg0.getY() / 4);
+		Grid.setCellValue(arg0.getX() / 4, arg0.getY() / 4, currentCellEdit);
 		this.repaint();
-
 	}
 
 	@Override
@@ -66,12 +66,25 @@ public class MapDisplay extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+
+		Grid.setCellValue(arg0.getX() / 4, arg0.getY() / 4, currentCellEdit);
+		this.repaint();
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
