@@ -4,7 +4,7 @@ Conways-Game-of-Life
 Population simulation which follows set rules.
 
 
-Current Version 0.1
+Current Version 0.5
 
 Version 0.1 - Initial simulation. 0 Control from user.
 
@@ -14,9 +14,9 @@ Version 0.3 - Added ability to change simulation speed.
 
 Version 0.4 - Added forward frame button.
 
-Version 0.5 - Added data display.
+Version 0.5 - Added basic ability to edit cells by clicking on them.
 
-
+Version 0.6 -
 			
 PLANNED FEATURE: - Load certain cool shapes.
 				 - Click to create cells

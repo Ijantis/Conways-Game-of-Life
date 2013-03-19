@@ -6,7 +6,7 @@ public class Grid {
 
 	private int width;
 	private int height;
-	private Cell[][] data;
+	private static Cell[][] data;
 
 	/**
 	 * Creates a new Grid instance and fills it up with dead cells.
@@ -75,11 +75,11 @@ public class Grid {
 
 	}
 
-	public int getCellValue(int x, int y) {
+	public static int getCellValue(int x, int y) {
 		return data[x][y].getCellValue();
 	}
 
-	public void setCellValue(int x, int y, int value) {
+	public static void setCellValue(int x, int y, int value) {
 		data[x][y].setValue(value);
 	}
 
@@ -115,6 +115,16 @@ public class Grid {
 				}
 			}
 		}
+	}
+
+	public static void swapCellValue(int x, int y) {
+
+		if (data[x][y].getCellValue() == Cell.Alive) {
+			data[x][y].setValue(Cell.Dead);
+		} else {
+			data[x][y].setValue(Cell.Alive);
+		}
+
 	}
 
 }
