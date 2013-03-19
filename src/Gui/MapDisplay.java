@@ -13,7 +13,7 @@ import Map.Grid;
 @SuppressWarnings("serial")
 public class MapDisplay extends JPanel implements MouseListener {
 
-	private static Grid data;
+	protected static Grid data;
 
 	public MapDisplay() {
 		addMouseListener(this);

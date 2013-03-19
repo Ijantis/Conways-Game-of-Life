@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import Map.Grid;
+
 /**
  * 
  * @author philip
@@ -20,7 +22,6 @@ import javax.swing.JSplitPane;
  */
 public class ArrangeGui {
 
-	GuiMain guiMain;
 	JPanel mainPanel;
 	JSplitPane splitPane;
 	private static JButton backward;
@@ -28,7 +29,6 @@ public class ArrangeGui {
 
 	protected ArrangeGui(GuiMain guiMain) {
 
-		this.guiMain = guiMain;
 		mainPanel = new JPanel(new GridLayout(20, 1));
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		guiMain.add(splitPane);
@@ -49,7 +49,8 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				MapDisplay.data.reset();
+				GuiMain.mapDisplay.repaint();
 
 			}
 		});
@@ -130,7 +131,7 @@ public class ArrangeGui {
 
 				Main.Main.isPaused = false;
 				forward.setEnabled(false);
-				backward.setEnabled(false);
+				// backward.setEnabled(false);
 
 			}
 		});
@@ -144,7 +145,7 @@ public class ArrangeGui {
 
 				Main.Main.isPaused = true;
 				forward.setEnabled(true);
-				backward.setEnabled(true);
+				// backward.setEnabled(true);
 
 			}
 		});

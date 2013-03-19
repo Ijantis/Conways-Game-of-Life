@@ -127,4 +127,13 @@ public class Grid {
 
 	}
 
+	public void reset() {
+
+		for (int i = 0; i < data.length; i++) {
+			for (int j = 0; j < data[0].length; j++) {
+				data[i][j] = new Cell(Cell.Dead);
+			}
+		}
+	}
+
 }
