@@ -24,7 +24,7 @@ public class ArrangeGui {
 
 	JPanel mainPanel;
 	JSplitPane splitPane;
-	private static JButton backward;
+//	private static JButton backward;
 	private static JButton forward;
 
 	protected ArrangeGui(GuiMain guiMain) {
