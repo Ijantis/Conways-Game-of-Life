@@ -24,23 +24,6 @@ public class Grid {
 
 	}
 
-	/*
-	 * Copy constructor
-	 */
-	// public Grid(Grid myGrid) {
-	// this.width = myGrid.width;
-	// this.height = myGrid.height;
-	// this.data = new Cell[myGrid.width][myGrid.height];
-	// initialiseCells();
-	//
-	// for (int i = 0; i < data.length; i++) {
-	// for (int j = 0; j < data[0].length; j++) {
-	// this.data[i][j].setValue(myGrid.data[i][j].getCellValue());
-	// }
-	// }
-	//
-	// }
-
 	/**
 	 * Returns the current width of the map.
 	 * 

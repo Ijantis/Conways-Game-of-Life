@@ -2,6 +2,7 @@ package Main;
 
 import java.util.Stack;
 
+import Gui.ArrangeGui;
 import Gui.GuiMain;
 import Map.Cell;
 import Map.Grid;
@@ -13,7 +14,6 @@ public class Main implements Runnable {
 	private static int speed = 100;
 	private static Stack<Coordinate> toBeRevived = new Stack<Coordinate>();
 	private static Stack<Coordinate> toBeKilled = new Stack<Coordinate>();
-	public static int frameNumber = 0;
 
 	public static void main(String[] args) {
 
@@ -43,7 +43,7 @@ public class Main implements Runnable {
 			if (isPaused) {
 				pauseProgram(10);
 			} else {
-//				addFrame();
+				// addFrame();
 				calculateCellsToUpdate();
 				updateCells();
 				updateGraphics();
@@ -53,43 +53,13 @@ public class Main implements Runnable {
 
 	}
 
-//	private static void addFrame() {
-//
-//		frames.push(new Grid(myGrid));
-//		frameNumber++;
-//		System.out.println("Frame Number : " + frameNumber);
-//		System.out.println("Size : " + frames.size());
-//		System.out.println("Added");
-//		System.out.println(myGrid.getCellTypeCount(Cell.Alive));
-//		System.out.println("Frame number : " + frameNumber);
-//
-//	}
-
 	public static void nextFrame() {
 
-//		addFrame();
 		calculateCellsToUpdate();
 		updateCells();
 		updateGraphics();
 
 	}
-
-//	public static void previousFrame() {
-//
-//		try {
-//			myGrid = frames.pop();
-//
-//			frameNumber--;
-//			System.out.println("Removed");
-//			System.out.println(myGrid.getCellTypeCount(Cell.Alive));
-//			System.out.println("Frame number : " + frameNumber);
-//
-//			updateGraphics();
-//
-//		} catch (EmptyStackException e) {
-//		}
-//
-//	}
 
 	private static void updateCells() {
 		Coordinate temp;
@@ -108,7 +78,6 @@ public class Main implements Runnable {
 
 	private static void updateGraphics() {
 
-		// System.out.println(myGrid.getCellTypeCount(Cell.Alive));
 		GuiMain.mapDisplay.updateMap(myGrid);
 
 	}
@@ -194,6 +163,7 @@ public class Main implements Runnable {
 		if (!(Main.speed + speed < 10 || Main.speed + speed > 200)) {
 
 			Main.speed += speed;
+			ArrangeGui.setSpeed(Main.speed);
 		}
 
 	}
