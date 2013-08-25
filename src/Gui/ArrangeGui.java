@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -25,11 +26,13 @@ public class ArrangeGui {
 	JSplitPane splitPane;
 	// private static JButton backward;
 	private static JButton forward;
+	private static JLabel speedLabel;
 
 	protected ArrangeGui(GuiMain guiMain) {
 
 		mainPanel = new JPanel(new GridLayout(20, 1));
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		speedLabel = new JLabel("100ms");
 		guiMain.add(splitPane);
 
 		createMapArea();
@@ -37,7 +40,14 @@ public class ArrangeGui {
 		createSpeedButtons();
 		createFrameButtons();
 		createResetButton();
+		createLabel();
 
+	}
+
+	private void createLabel() {
+		
+		mainPanel.add(speedLabel);
+		
 	}
 
 	private void createResetButton() {
@@ -72,19 +82,6 @@ public class ArrangeGui {
 			}
 		});
 
-		// backward = new JButton("<");
-		//
-		// backward.addActionListener(new ActionListener() {
-		//
-		// @Override
-		// public void actionPerformed(ActionEvent e) {
-		// Main.Main.previousFrame();
-		// }
-		// });
-		//
-		// JPanel temp = new JPanel(new FlowLayout());
-		// temp.add(backward);
-		// temp.add(forward);
 		mainPanel.add(forward);
 
 	}
@@ -130,7 +127,6 @@ public class ArrangeGui {
 
 				Main.Main.isPaused = false;
 				forward.setEnabled(false);
-				// backward.setEnabled(false);
 
 			}
 		});
@@ -144,7 +140,6 @@ public class ArrangeGui {
 
 				Main.Main.isPaused = true;
 				forward.setEnabled(true);
-				// backward.setEnabled(true);
 
 			}
 		});
@@ -155,6 +150,12 @@ public class ArrangeGui {
 	@SuppressWarnings({ "unused" })
 	private ArrangeGui() {
 
+	}
+
+	public static void setSpeed(int speed) {
+		
+		speedLabel.setText(speed + "ms");
+		
 	}
 
 }
