@@ -1,6 +1,7 @@
 package Gui;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
@@ -22,8 +23,8 @@ public class GuiMain extends JFrame {
 	private void initialiseMap(Grid myGrid) {
 
 		mapDisplay = new MapDisplay();
-		mapDisplay.setPreferredSize(new Dimension(myGrid.getWidth() * 4, myGrid
-				.getHeight() * 4));
+		mapDisplay.setPreferredSize(new Dimension(myGrid.getWidth() * 5, myGrid
+				.getHeight() * 5));
 		mapDisplay.updateMap(myGrid);
 
 	}
