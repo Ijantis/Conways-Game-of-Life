@@ -59,6 +59,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 
+		//left mouse button
 		if (arg0.getButton() == 1) {
 			currentCellEdit = Cell.Alive;
 		} else {
@@ -67,7 +68,6 @@ public class MapDisplay extends JPanel implements MouseListener,
 
 		currentGrid.setCellValue(arg0.getX() / scale, arg0.getY() / scale, currentCellEdit);
 		this.repaint();
-		System.out.println(arg0.getButton());
 	}
 
 	@Override
@@ -84,7 +84,8 @@ public class MapDisplay extends JPanel implements MouseListener,
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-
+	
+		//right click
 		if (arg0.getButton() == 3) {
 			currentCellEdit = Cell.Dead;
 		} else if (arg0.getButton() == 1) {
@@ -94,6 +95,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		//right click
 		if (arg0.getButton() == 3) {
 			currentCellEdit = Cell.Alive;
 		}

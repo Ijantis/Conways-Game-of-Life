@@ -77,7 +77,7 @@ public class ArrangeGui {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				Main.Main.nextFrame();
+				Main.GameLoop.nextFrame();
 
 			}
 		});
@@ -93,7 +93,7 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Main.Main.changeSpeed(-10);
+				Main.GameLoop.changeSpeed(-10);
 			}
 		});
 
@@ -102,7 +102,7 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Main.Main.changeSpeed(10);
+				Main.GameLoop.changeSpeed(10);
 			}
 		});
 
@@ -125,7 +125,7 @@ public class ArrangeGui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Main.Main.isPaused = false;
+				Main.GameLoop.isPaused = false;
 				forward.setEnabled(false);
 
 			}
@@ -138,7 +138,7 @@ public class ArrangeGui {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				Main.Main.isPaused = true;
+				Main.GameLoop.isPaused = true;
 				forward.setEnabled(true);
 
 			}
