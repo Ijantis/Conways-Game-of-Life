@@ -11,7 +11,7 @@ import Map.Grid;
 public class Main implements Runnable {
 
 	public static boolean isPaused = true;
-	private static Grid myGrid;
+	private static Grid currentGrid;
 	private static int speed = 100;
 	private static Stack<Coordinate> toBeRevived = new Stack<Coordinate>();
 	private static Stack<Coordinate> toBeKilled = new Stack<Coordinate>();
@@ -19,16 +19,16 @@ public class Main implements Runnable {
 	public static void main(String[] args) {
 
 		
-		myGrid = Grid.getInstance();
-		myGrid.initialise(new Dimension(200,200));
+		currentGrid = Grid.getInstance();
+		currentGrid.initialise(new Dimension(200,200));
 
-		myGrid.setCellValue(100, 100, Cell.Alive);
-		myGrid.setCellValue(101, 101, Cell.Alive);
-		myGrid.setCellValue(101, 102, Cell.Alive);
-		myGrid.setCellValue(100, 101, Cell.Alive);
-		myGrid.setCellValue(99, 101, Cell.Alive);
+		currentGrid.setCellValue(100, 100, Cell.Alive);
+		currentGrid.setCellValue(101, 101, Cell.Alive);
+		currentGrid.setCellValue(101, 102, Cell.Alive);
+		currentGrid.setCellValue(100, 101, Cell.Alive);
+		currentGrid.setCellValue(99, 101, Cell.Alive);
 
-		new GuiMain(myGrid);
+		new GuiMain(currentGrid);
 		new Main();
 
 	}
@@ -69,19 +69,19 @@ public class Main implements Runnable {
 
 		while (!toBeRevived.isEmpty()) {
 			temp = toBeRevived.pop();
-			myGrid.setCellValue(temp.x, temp.y, Cell.Alive);
+			currentGrid.setCellValue(temp.x, temp.y, Cell.Alive);
 		}
 
 		while (!toBeKilled.isEmpty()) {
 			temp = toBeKilled.pop();
-			myGrid.setCellValue(temp.x, temp.y, Cell.Dead);
+			currentGrid.setCellValue(temp.x, temp.y, Cell.Dead);
 		}
 
 	}
 
 	private static void updateGraphics() {
 
-		GuiMain.mapDisplay.updateMap(myGrid);
+		GuiMain.mapDisplay.updateMap(currentGrid);
 
 	}
 
@@ -99,9 +99,9 @@ public class Main implements Runnable {
 
 		int value;
 		int neighbours;
-		for (int x = 0; x < myGrid.getWidth(); x++) {
-			for (int y = 0; y < myGrid.getHeight(); y++) {
-				value = myGrid.getCellValue(x, y);
+		for (int x = 0; x < currentGrid.getWidth(); x++) {
+			for (int y = 0; y < currentGrid.getHeight(); y++) {
+				value = currentGrid.getCellValue(x, y);
 				neighbours = checkCellNeighbours(x, y);
 				if (value == Cell.Alive && (neighbours < 2 || neighbours > 3)) {
 					toBeKilled.push(new Coordinate(x, y));
@@ -132,7 +132,7 @@ public class Main implements Runnable {
 		for (int x = (xCoord - 1); x < (xCoord + 2); x++) {
 			for (int y = (yCoord - 1); y < (yCoord + 2); y++) {
 				try {
-					if (myGrid.getCellValue(x, y) == Cell.Alive) {
+					if (currentGrid.getCellValue(x, y) == Cell.Alive) {
 						neighbours++;
 					}
 				} catch (ArrayIndexOutOfBoundsException e) {
@@ -140,7 +140,7 @@ public class Main implements Runnable {
 			}
 		}
 
-		if (myGrid.getCellValue(xCoord, yCoord) == Cell.Alive) {
+		if (currentGrid.getCellValue(xCoord, yCoord) == Cell.Alive) {
 			neighbours--;
 		}
 

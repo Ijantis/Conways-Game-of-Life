@@ -15,14 +15,14 @@ import Map.Grid;
 public class MapDisplay extends JPanel implements MouseListener,
 		MouseMotionListener {
 
-	protected static Grid data;
+	protected static Grid currentGrid;
 	protected static int currentCellEdit = Cell.Alive;
 	private final int scale = 5;
 
 	public MapDisplay() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		data = Grid.getInstance();
+		currentGrid = Grid.getInstance();
 	}
 
 	@Override
@@ -30,9 +30,9 @@ public class MapDisplay extends JPanel implements MouseListener,
 
 		
 
-		for (int x = 0; x < data.getWidth(); x++) {
-			for (int y = 0; y < data.getHeight(); y++) {
-				if (data.getCellValue(x, y) == Cell.Dead) {
+		for (int x = 0; x < currentGrid.getWidth(); x++) {
+			for (int y = 0; y < currentGrid.getHeight(); y++) {
+				if (currentGrid.getCellValue(x, y) == Cell.Dead) {
 					g.setColor(Color.white);
 					g.fillRect(x * scale, y * scale, scale, scale);
 				} else {
@@ -43,8 +43,8 @@ public class MapDisplay extends JPanel implements MouseListener,
 		}
 
 		g.setColor(Color.gray);
-		for (int x = 0; x < data.getWidth(); x++) {
-			for (int y = 0; y < data.getHeight(); y++) {
+		for (int x = 0; x < currentGrid.getWidth(); x++) {
+			for (int y = 0; y < currentGrid.getHeight(); y++) {
 				g.drawRect(x * scale, y * scale, scale, scale);
 			}
 		}
@@ -52,7 +52,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 	}
 
 	public void updateMap(Grid data) {
-		MapDisplay.data = data;
+		MapDisplay.currentGrid = data;
 		this.repaint();
 	}
 
@@ -65,7 +65,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 			currentCellEdit = Cell.Dead;
 		}
 
-		data.setCellValue(arg0.getX() / scale, arg0.getY() / scale, currentCellEdit);
+		currentGrid.setCellValue(arg0.getX() / scale, arg0.getY() / scale, currentCellEdit);
 		this.repaint();
 		System.out.println(arg0.getButton());
 	}
@@ -102,7 +102,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 
-		data.setCellValue(arg0.getX() / scale, arg0.getY() / scale, currentCellEdit);
+		currentGrid.setCellValue(arg0.getX() / scale, arg0.getY() / scale, currentCellEdit);
 		this.repaint();
 
 	}
