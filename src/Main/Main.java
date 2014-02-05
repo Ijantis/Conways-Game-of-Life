@@ -50,7 +50,7 @@ public class Main implements Runnable {
 				calculateCellsToUpdate();
 				updateCells();
 				updateGraphics();
-				pauseProgram(Main.speed);
+				pauseProgram(speed);
 			}
 		}
 
@@ -161,7 +161,7 @@ public class Main implements Runnable {
 	 * @param speed
 	 *            the speed to set
 	 */
-	public static void setSpeed(int speed) {
+	public static void changeSpeed(int speed) {
 
 		if (!(Main.speed + speed < 10 || Main.speed + speed > 200)) {
 

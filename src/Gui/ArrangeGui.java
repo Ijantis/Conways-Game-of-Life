@@ -58,7 +58,7 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				MapDisplay.data.reset();
+				MapDisplay.currentGrid.reset();
 				GuiMain.mapDisplay.repaint();
 
 			}
@@ -93,7 +93,7 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Main.Main.setSpeed(-10);
+				Main.Main.changeSpeed(-10);
 			}
 		});
 
@@ -102,7 +102,7 @@ public class ArrangeGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Main.Main.setSpeed(10);
+				Main.Main.changeSpeed(10);
 			}
 		});
 
