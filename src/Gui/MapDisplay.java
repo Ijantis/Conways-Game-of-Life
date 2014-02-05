@@ -21,6 +21,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 	public MapDisplay() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		data = Grid.getInstance();
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 
 		for (int x = 0; x < data.getWidth(); x++) {
 			for (int y = 0; y < data.getHeight(); y++) {
-				if (Grid.getCellValue(x, y) == Cell.Dead) {
+				if (data.getCellValue(x, y) == Cell.Dead) {
 					g.setColor(Color.white);
 					g.fillRect(x * 5, y * 5, 5, 5);
 				} else {
@@ -61,7 +62,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 			currentCellEdit = Cell.Dead;
 		}
 
-		Grid.setCellValue(arg0.getX() / 5, arg0.getY() / 5, currentCellEdit);
+		data.setCellValue(arg0.getX() / 5, arg0.getY() / 5, currentCellEdit);
 		this.repaint();
 		System.out.println(arg0.getButton());
 	}
@@ -98,7 +99,7 @@ public class MapDisplay extends JPanel implements MouseListener,
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 
-		Grid.setCellValue(arg0.getX() / 5, arg0.getY() / 5, currentCellEdit);
+		data.setCellValue(arg0.getX() / 5, arg0.getY() / 5, currentCellEdit);
 		this.repaint();
 
 	}

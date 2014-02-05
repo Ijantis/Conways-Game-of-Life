@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.Dimension;
 import java.util.Stack;
 
 import Gui.ArrangeGui;
@@ -17,13 +18,15 @@ public class Main implements Runnable {
 
 	public static void main(String[] args) {
 
-		myGrid = new Grid(200, 200);
+		
+		myGrid = Grid.getInstance();
+		myGrid.initialise(new Dimension(200,200));
 
-		Grid.setCellValue(100, 100, Cell.Alive);
-		Grid.setCellValue(101, 101, Cell.Alive);
-		Grid.setCellValue(101, 102, Cell.Alive);
-		Grid.setCellValue(100, 101, Cell.Alive);
-		Grid.setCellValue(99, 101, Cell.Alive);
+		myGrid.setCellValue(100, 100, Cell.Alive);
+		myGrid.setCellValue(101, 101, Cell.Alive);
+		myGrid.setCellValue(101, 102, Cell.Alive);
+		myGrid.setCellValue(100, 101, Cell.Alive);
+		myGrid.setCellValue(99, 101, Cell.Alive);
 
 		new GuiMain(myGrid);
 		new Main();
@@ -66,12 +69,12 @@ public class Main implements Runnable {
 
 		while (!toBeRevived.isEmpty()) {
 			temp = toBeRevived.pop();
-			Grid.setCellValue(temp.x, temp.y, Cell.Alive);
+			myGrid.setCellValue(temp.x, temp.y, Cell.Alive);
 		}
 
 		while (!toBeKilled.isEmpty()) {
 			temp = toBeKilled.pop();
-			Grid.setCellValue(temp.x, temp.y, Cell.Dead);
+			myGrid.setCellValue(temp.x, temp.y, Cell.Dead);
 		}
 
 	}
@@ -98,7 +101,7 @@ public class Main implements Runnable {
 		int neighbours;
 		for (int x = 0; x < myGrid.getWidth(); x++) {
 			for (int y = 0; y < myGrid.getHeight(); y++) {
-				value = Grid.getCellValue(x, y);
+				value = myGrid.getCellValue(x, y);
 				neighbours = checkCellNeighbours(x, y);
 				if (value == Cell.Alive && (neighbours < 2 || neighbours > 3)) {
 					toBeKilled.push(new Coordinate(x, y));
@@ -129,7 +132,7 @@ public class Main implements Runnable {
 		for (int x = (xCoord - 1); x < (xCoord + 2); x++) {
 			for (int y = (yCoord - 1); y < (yCoord + 2); y++) {
 				try {
-					if (Grid.getCellValue(x, y) == Cell.Alive) {
+					if (myGrid.getCellValue(x, y) == Cell.Alive) {
 						neighbours++;
 					}
 				} catch (ArrayIndexOutOfBoundsException e) {
@@ -137,7 +140,7 @@ public class Main implements Runnable {
 			}
 		}
 
-		if (Grid.getCellValue(xCoord, yCoord) == Cell.Alive) {
+		if (myGrid.getCellValue(xCoord, yCoord) == Cell.Alive) {
 			neighbours--;
 		}
 

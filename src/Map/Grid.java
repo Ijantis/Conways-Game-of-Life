@@ -1,5 +1,6 @@
 package Map;
 
+import java.awt.Dimension;
 import java.util.Random;
 
 public class Grid {
@@ -7,41 +8,21 @@ public class Grid {
 	private int width;
 	private int height;
 	private static Cell[][] data;
+	private static Grid instance;
 
-	/**
-	 * Creates a new Grid instance and fills it up with dead cells.
-	 * 
-	 * @param height
-	 *            - Height of the map
-	 * @param width
-	 *            - Width of the map
-	 */
-	public Grid(int height, int width) {
+	public void initialise(Dimension size) {
+		this.height = (int) size.getHeight();
+		this.width = (int) size.getWidth();
+		initialiseCells();
+	}
+
+	private Grid(int height, int width) {
 
 		this.height = height;
 		this.width = width;
 		initialiseCells();
-
 	}
-
-	/**
-	 * Returns the current width of the map.
-	 * 
-	 * @return width - The width of the map along the x-axis
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Returns the current height of the map.
-	 * 
-	 * @return height - The height of the map along the y-axis
-	 */
-	public int getHeight() {
-		return height;
-	}
-
+	
 	private void initialiseCells() {
 		data = new Cell[this.width][this.height];
 
@@ -53,16 +34,31 @@ public class Grid {
 
 	}
 
-	@SuppressWarnings("unused")
-	private Grid() {
+	public synchronized static Grid getInstance() {
 
+		if (instance == null) {
+			instance = new Grid();
+		}
+		return instance;
+	}
+	
+	private Grid() {
+		
 	}
 
-	public static int getCellValue(int x, int y) {
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getCellValue(int x, int y) {
 		return data[x][y].getCellValue();
 	}
 
-	public static void setCellValue(int x, int y, int value) {
+	public void setCellValue(int x, int y, int value) {
 		data[x][y].setValue(value);
 	}
 
