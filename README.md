@@ -26,5 +26,4 @@ PLANNED FEATURE: - Load certain cool shapes.
 				 - Click to create cells
 
 RETHINK: How to go back a frame? Current implementation with a stack runs out of memory. Maybe not possible?
-
-TODO: Make right click remove cells while left click adds them.
+		 Not possible....
