@@ -28,7 +28,7 @@ public class GameLoop implements Runnable {
 		currentGrid.setCellValue(99, 101, Cell.Alive);
 
 		new GuiMain(currentGrid);
-		
+
 		Thread t1 = new Thread(this);
 		t1.start();
 
@@ -43,7 +43,7 @@ public class GameLoop implements Runnable {
 			} else {
 				calculateCellsToUpdate();
 				updateCells();
-				updateGraphics();
+				redrawMap();
 				pauseProgram(speed);
 			}
 		}
@@ -54,28 +54,7 @@ public class GameLoop implements Runnable {
 
 		calculateCellsToUpdate();
 		updateCells();
-		updateGraphics();
-
-	}
-
-	private static void updateCells() {
-		Coordinate temp;
-
-		while (!cellsToBeRevived.isEmpty()) {
-			temp = cellsToBeRevived.pop();
-			currentGrid.setCellValue(temp.x, temp.y, Cell.Alive);
-		}
-
-		while (!cellsToBeKilled.isEmpty()) {
-			temp = cellsToBeKilled.pop();
-			currentGrid.setCellValue(temp.x, temp.y, Cell.Dead);
-		}
-
-	}
-
-	private static void updateGraphics() {
-
-		GuiMain.mapDisplay.updateMap(currentGrid);
+		redrawMap();
 
 	}
 
@@ -96,7 +75,7 @@ public class GameLoop implements Runnable {
 		for (int x = 0; x < currentGrid.getWidth(); x++) {
 			for (int y = 0; y < currentGrid.getHeight(); y++) {
 				value = currentGrid.getCellValue(x, y);
-				neighbours = checkCellNeighbours(x, y);
+				neighbours = calculateLiveNeighbours(x, y);
 				if (value == Cell.Alive && (neighbours < 2 || neighbours > 3)) {
 					cellsToBeKilled.push(new Coordinate(x, y));
 				} else if (value == Cell.Dead && neighbours == 3) {
@@ -108,19 +87,30 @@ public class GameLoop implements Runnable {
 
 	}
 
-	/**
-	 * 
-	 * Checks to see how many direct neighbours a certain cell has.
-	 * 
-	 * @param xCoord
-	 *            - The x coordinate of the cell to be checked
-	 * @param yCoord
-	 *            - The y coordinate of the cell to be checked
-	 * @return neighbours - The number of live neighbours a cell has
-	 */
+	private static void updateCells() {
+		Coordinate temp;
+
+		while (!cellsToBeRevived.isEmpty()) {
+			temp = cellsToBeRevived.pop();
+			currentGrid.setCellValue(temp.x, temp.y, Cell.Alive);
+		}
+
+		while (!cellsToBeKilled.isEmpty()) {
+			temp = cellsToBeKilled.pop();
+			currentGrid.setCellValue(temp.x, temp.y, Cell.Dead);
+		}
+
+	}
+
+	private static void redrawMap() {
+
+		GuiMain.redrawMap(currentGrid);
+
+	}
+
 	// TODO This method counts the cell being checked as a neighbour. OPTIMISE
 	// IT
-	private static int checkCellNeighbours(int xCoord, int yCoord) {
+	private static int calculateLiveNeighbours(int xCoord, int yCoord) {
 		int neighbours = 0;
 
 		for (int x = (xCoord - 1); x < (xCoord + 2); x++) {
@@ -151,11 +141,7 @@ public class GameLoop implements Runnable {
 
 	}
 
-	/**
-	 * @param speed
-	 *            the speed to set
-	 */
-	public static void incrementSpeed(int speedIncrement) {
+	public static void incrementSimulationSpeed(int speedIncrement) {
 
 		if (!(speed + speedIncrement < 10 || speed + speedIncrement > 200)) {
 

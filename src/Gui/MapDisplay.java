@@ -1,6 +1,7 @@
 package Gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,20 +9,21 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
+import Gui.Listeners.MouseCellListener;
 import Map.Cell;
 import Map.Grid;
 
 @SuppressWarnings("serial")
-public class MapDisplay extends JPanel implements MouseListener,
-		MouseMotionListener {
+public class MapDisplay extends JPanel {
 
 	public static Grid currentGrid;
-	protected static int currentCellEdit = Cell.Alive;
-	private final int scale = 5;
+	private static int currentCellEdit = Cell.Alive;
+	private static final int scale = 5;
+	private static MapDisplay instance;
 
-	public MapDisplay() {
-		addMouseListener(this);
-		addMouseMotionListener(this);
+	private MapDisplay() {
+		addMouseListener(new MouseCellListener());
+		addMouseMotionListener(new MouseCellListener());
 		currentGrid = Grid.getInstance();
 	}
 
@@ -52,67 +54,28 @@ public class MapDisplay extends JPanel implements MouseListener,
 	}
 
 	public void updateMap(Grid data) {
-		MapDisplay.currentGrid = data;
+		currentGrid = Grid.getInstance();
 		this.repaint();
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-
-		//left mouse button
-		if (arg0.getButton() == 1) {
-			currentCellEdit = Cell.Alive;
-		} else {
-			currentCellEdit = Cell.Dead;
-		}
-
-		currentGrid.setCellValue(arg0.getX() / scale, arg0.getY() / scale, currentCellEdit);
-		this.repaint();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
 	
-		//right click
-		if (arg0.getButton() == 3) {
-			currentCellEdit = Cell.Dead;
-		} else if (arg0.getButton() == 1) {
-			currentCellEdit = Cell.Alive;
+	public static void setCellEdit(int edit) {
+		currentCellEdit = edit;
+	}
+	
+	public static int getCellEdit() {
+		return currentCellEdit;
+	}
+
+	public static MapDisplay getInstance() {
+		
+		if (instance == null) {
+			instance = new MapDisplay();
 		}
+		
+		return instance;
 	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		//right click
-		if (arg0.getButton() == 3) {
-			currentCellEdit = Cell.Alive;
-		}
+	
+	public static int getScale() {
+		return scale;
 	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-
-		currentGrid.setCellValue(arg0.getX() / scale, arg0.getY() / scale, currentCellEdit);
-		this.repaint();
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

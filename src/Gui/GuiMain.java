@@ -22,7 +22,7 @@ public class GuiMain extends JFrame {
 
 	private void initialiseMap(Grid myGrid) {
 
-		mapDisplay = new MapDisplay();
+		mapDisplay = MapDisplay.getInstance();
 		mapDisplay.setPreferredSize(new Dimension(myGrid.getWidth() * 5, myGrid
 				.getHeight() * 5));
 		mapDisplay.updateMap(myGrid);
@@ -35,6 +35,12 @@ public class GuiMain extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(true);
 		pack();
+
+	}
+
+	public static void redrawMap(Grid currentGrid) {
+
+		mapDisplay.updateMap(currentGrid);
 
 	}
 

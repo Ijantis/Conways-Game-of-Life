@@ -10,11 +10,11 @@ public class SpeedChangeListener implements ActionListener {
 
 		switch (arg0.getActionCommand()) {
 		case "Faster":
-			Main.GameLoop.incrementSpeed(-10);
+			Main.GameLoop.incrementSimulationSpeed(-10);
 			break;
 
 		case "Slower":
-			Main.GameLoop.incrementSpeed(10);
+			Main.GameLoop.incrementSimulationSpeed(10);
 			break;
 		}
 

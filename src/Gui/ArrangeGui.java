@@ -25,8 +25,8 @@ import Map.Cell;
  */
 public class ArrangeGui {
 
-	JPanel mainPanel;
-	JSplitPane splitPane;
+	private JPanel mainPanel;
+	private JSplitPane splitPane;
 	private static JButton forward;
 	private static JLabel speedLabel;
 
@@ -47,24 +47,15 @@ public class ArrangeGui {
 	}
 
 	private void createLabel() {
-		
+
 		mainPanel.add(speedLabel);
-		
+
 	}
 
 	private void createResetButton() {
 
 		JButton resetButton = new JButton("Reset");
-
-		resetButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				MapDisplay.currentGrid.reset();
-				GuiMain.mapDisplay.repaint();
-
-			}
-		});
+		resetButton.addActionListener(new NextFrameResetListener());
 
 		mainPanel.add(resetButton);
 
@@ -116,15 +107,15 @@ public class ArrangeGui {
 	}
 
 	public static void setSpeed(int speed) {
-		
+
 		speedLabel.setText(speed + "ms");
-		
+
 	}
-	
+
 	public static void enableForwardButton() {
 		forward.setEnabled(true);
 	}
-	
+
 	public static void disableForwardButton() {
 		forward.setEnabled(false);
 	}
