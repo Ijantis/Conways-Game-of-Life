@@ -41,7 +41,6 @@ public class GameLoop implements Runnable {
 			if (isPaused) {
 				pauseProgram(10);
 			} else {
-				// addFrame();
 				calculateCellsToUpdate();
 				updateCells();
 				updateGraphics();
@@ -156,11 +155,11 @@ public class GameLoop implements Runnable {
 	 * @param speed
 	 *            the speed to set
 	 */
-	public static void changeSpeed(int speed) {
+	public static void incrementSpeed(int speedIncrement) {
 
-		if (!(speed + speed < 10 || speed + speed > 200)) {
+		if (!(speed + speedIncrement < 10 || speed + speedIncrement > 200)) {
 
-			speed += speed;
+			speed += speedIncrement;
 			ArrangeGui.setSpeed(speed);
 		}
 

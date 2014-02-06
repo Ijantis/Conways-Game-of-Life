@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import Gui.Listeners.NextFrameResetListener;
+import Gui.Listeners.SpeedChangeListener;
+import Gui.Listeners.StartStopListener;
 import Map.Cell;
 
 /**
@@ -24,7 +27,6 @@ public class ArrangeGui {
 
 	JPanel mainPanel;
 	JSplitPane splitPane;
-	// private static JButton backward;
 	private static JButton forward;
 	private static JLabel speedLabel;
 
@@ -71,16 +73,7 @@ public class ArrangeGui {
 	private void createFrameButtons() {
 
 		forward = new JButton(">");
-
-		forward.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				Main.GameLoop.nextFrame();
-
-			}
-		});
+		forward.addActionListener(new NextFrameResetListener());
 
 		mainPanel.add(forward);
 
@@ -89,22 +82,10 @@ public class ArrangeGui {
 	private void createSpeedButtons() {
 
 		JButton faster = new JButton("Faster");
-		faster.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Main.GameLoop.changeSpeed(-10);
-			}
-		});
+		faster.addActionListener(new SpeedChangeListener());
 
 		JButton slower = new JButton("Slower");
-		slower.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Main.GameLoop.changeSpeed(10);
-			}
-		});
+		slower.addActionListener(new SpeedChangeListener());
 
 		mainPanel.add(faster);
 		mainPanel.add(slower);
@@ -120,29 +101,11 @@ public class ArrangeGui {
 		splitPane.add(mainPanel);
 
 		JButton startButton = new JButton("Start");
-		startButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				Main.GameLoop.isPaused = false;
-				forward.setEnabled(false);
-
-			}
-		});
+		startButton.addActionListener(new StartStopListener());
 		mainPanel.add(startButton);
 
 		JButton pauseButton = new JButton("Pause");
-		pauseButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				Main.GameLoop.isPaused = true;
-				forward.setEnabled(true);
-
-			}
-		});
+		pauseButton.addActionListener(new StartStopListener());
 		mainPanel.add(pauseButton);
 
 	}
@@ -156,6 +119,14 @@ public class ArrangeGui {
 		
 		speedLabel.setText(speed + "ms");
 		
+	}
+	
+	public static void enableForwardButton() {
+		forward.setEnabled(true);
+	}
+	
+	public static void disableForwardButton() {
+		forward.setEnabled(false);
 	}
 
 }

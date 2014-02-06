@@ -15,7 +15,7 @@ import Map.Grid;
 public class MapDisplay extends JPanel implements MouseListener,
 		MouseMotionListener {
 
-	protected static Grid currentGrid;
+	public static Grid currentGrid;
 	protected static int currentCellEdit = Cell.Alive;
 	private final int scale = 5;
 
