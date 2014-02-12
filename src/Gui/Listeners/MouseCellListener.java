@@ -15,13 +15,13 @@ public class MouseCellListener implements MouseMotionListener, MouseListener {
 
 		// left mouse button
 		if (arg0.getButton() == 1) {
-			MapDisplay.setCellEdit(Cell.Alive);
+			MapDisplay.setCellDrawType(Cell.Alive);
 		} else {
-			MapDisplay.setCellEdit(Cell.Dead);
+			MapDisplay.setCellDrawType(Cell.Dead);
 		}
 
 		Grid.getInstance().setCellValue(arg0.getX() / MapDisplay.getScale(),
-				arg0.getY() / MapDisplay.getScale(), MapDisplay.getCellEdit());
+				arg0.getY() / MapDisplay.getScale(), MapDisplay.getCellDrawType());
 		MapDisplay.getInstance().repaint();
 	}
 
@@ -42,9 +42,9 @@ public class MouseCellListener implements MouseMotionListener, MouseListener {
 
 		// right click
 		if (arg0.getButton() == 3) {
-			MapDisplay.setCellEdit(Cell.Dead);
+			MapDisplay.setCellDrawType(Cell.Dead);
 		} else if (arg0.getButton() == 1) {
-			MapDisplay.setCellEdit(Cell.Alive);
+			MapDisplay.setCellDrawType(Cell.Alive);
 		}
 	}
 
@@ -52,14 +52,14 @@ public class MouseCellListener implements MouseMotionListener, MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 		// right click
 		if (arg0.getButton() == 3) {
-			MapDisplay.setCellEdit(Cell.Alive);
+			MapDisplay.setCellDrawType(Cell.Alive);
 		}
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		Grid.getInstance().setCellValue(arg0.getX() / MapDisplay.getScale(),
-				arg0.getY() / MapDisplay.getScale(), MapDisplay.getCellEdit());
+				arg0.getY() / MapDisplay.getScale(), MapDisplay.getCellDrawType());
 		MapDisplay.getInstance().repaint();
 
 	}
