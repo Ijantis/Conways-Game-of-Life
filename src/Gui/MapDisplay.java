@@ -14,7 +14,7 @@ public class MapDisplay extends JPanel {
 
 	public static Grid currentGrid;
 	private static int currentCellDrawType = Cell.Alive;
-	private static final int drawingScale = 5;
+	private static final int drawingScale = 4;
 	private static MapDisplay instance;
 
 	@Override

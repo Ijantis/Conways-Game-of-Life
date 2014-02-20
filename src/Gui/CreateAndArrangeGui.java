@@ -23,14 +23,14 @@ import Map.Cell;
  *         outputting data.
  * 
  */
-public class ArrangeGui {
+public class CreateAndArrangeGui {
 
 	private JPanel mainPanel;
 	private JSplitPane splitPane;
 	private static JButton forward;
 	private static JLabel speedLabel;
 
-	protected ArrangeGui(GuiMain guiMain) {
+	protected CreateAndArrangeGui(GuiMain guiMain) {
 
 		mainPanel = new JPanel(new GridLayout(20, 1));
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
@@ -102,7 +102,7 @@ public class ArrangeGui {
 	}
 
 	@SuppressWarnings({ "unused" })
-	private ArrangeGui() {
+	private CreateAndArrangeGui() {
 
 	}
 

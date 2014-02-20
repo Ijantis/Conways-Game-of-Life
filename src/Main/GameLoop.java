@@ -3,7 +3,7 @@ package Main;
 import java.awt.Dimension;
 import java.util.Stack;
 
-import Gui.ArrangeGui;
+import Gui.CreateAndArrangeGui;
 import Gui.GuiMain;
 import Map.Cell;
 import Map.Grid;
@@ -135,7 +135,7 @@ public class GameLoop implements Runnable {
 		if (!(updateSpeedMilis + speedIncrement < 10 || updateSpeedMilis + speedIncrement > 200)) {
 
 			updateSpeedMilis += speedIncrement;
-			ArrangeGui.setSpeed(updateSpeedMilis);
+			CreateAndArrangeGui.setSpeed(updateSpeedMilis);
 		}
 
 	}
