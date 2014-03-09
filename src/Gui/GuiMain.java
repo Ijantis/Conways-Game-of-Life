@@ -16,15 +16,16 @@ public class GuiMain extends JFrame {
 		super("Life Simulation");
 
 		initialiseMap(myGrid);
-		new ArrangeGui(this);
+		new CreateAndArrangeGui(this);
 		initialiseFrame();
 	}
 
 	private void initialiseMap(Grid myGrid) {
 
 		mapDisplay = MapDisplay.getInstance();
-		mapDisplay.setPreferredSize(new Dimension(myGrid.getWidth() * 5, myGrid
-				.getHeight() * 5));
+		mapDisplay.setPreferredSize(new Dimension(myGrid.getWidth()
+				* MapDisplay.getScale(), myGrid.getHeight()
+				* MapDisplay.getScale()));
 		mapDisplay.updateMap(myGrid);
 
 	}
@@ -33,7 +34,7 @@ public class GuiMain extends JFrame {
 
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(true);
+		setResizable(false);
 		pack();
 
 	}

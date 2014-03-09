@@ -1,11 +1,7 @@
 package Gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
@@ -17,37 +13,40 @@ import Map.Grid;
 public class MapDisplay extends JPanel {
 
 	public static Grid currentGrid;
-	private static int currentCellEdit = Cell.Alive;
-	private static final int scale = 5;
+	private static int currentCellDrawType = Cell.Alive;
+	private static final int drawingScale = 4;
 	private static MapDisplay instance;
-
-	private MapDisplay() {
-		addMouseListener(new MouseCellListener());
-		addMouseMotionListener(new MouseCellListener());
-		currentGrid = Grid.getInstance();
-	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 
-		
+		drawCells(g);
+		drawGrid(g);
+
+	}
+
+	private void drawCells(Graphics g) {
 
 		for (int x = 0; x < currentGrid.getWidth(); x++) {
 			for (int y = 0; y < currentGrid.getHeight(); y++) {
 				if (currentGrid.getCellValue(x, y) == Cell.Dead) {
 					g.setColor(Color.white);
-					g.fillRect(x * scale, y * scale, scale, scale);
+					g.fillRect(x * drawingScale, y * drawingScale, drawingScale, drawingScale);
 				} else {
 					g.setColor(Color.black);
-					g.fillRect(x * scale, y * scale, scale, scale);
+					g.fillRect(x * drawingScale, y * drawingScale, drawingScale, drawingScale);
 				}
 			}
 		}
 
+	}
+
+	private void drawGrid(Graphics g) {
+
 		g.setColor(Color.gray);
 		for (int x = 0; x < currentGrid.getWidth(); x++) {
 			for (int y = 0; y < currentGrid.getHeight(); y++) {
-				g.drawRect(x * scale, y * scale, scale, scale);
+				g.drawRect(x * drawingScale, y * drawingScale, drawingScale, drawingScale);
 			}
 		}
 
@@ -57,25 +56,31 @@ public class MapDisplay extends JPanel {
 		currentGrid = Grid.getInstance();
 		this.repaint();
 	}
-	
-	public static void setCellEdit(int edit) {
-		currentCellEdit = edit;
+
+	public static void setCellDrawType(int edit) {
+		currentCellDrawType = edit;
 	}
-	
-	public static int getCellEdit() {
-		return currentCellEdit;
+
+	public static int getCellDrawType() {
+		return currentCellDrawType;
 	}
 
 	public static MapDisplay getInstance() {
-		
+
 		if (instance == null) {
 			instance = new MapDisplay();
 		}
-		
+
 		return instance;
 	}
-	
+
+	private MapDisplay() {
+		addMouseListener(new MouseCellListener());
+		addMouseMotionListener(new MouseCellListener());
+		currentGrid = Grid.getInstance();
+	}
+
 	public static int getScale() {
-		return scale;
+		return drawingScale;
 	}
 }

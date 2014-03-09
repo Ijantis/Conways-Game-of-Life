@@ -3,7 +3,7 @@ package Gui.Listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Gui.ArrangeGui;
+import Gui.CreateAndArrangeGui;
 
 public class StartStopListener implements ActionListener {
 
@@ -13,12 +13,12 @@ public class StartStopListener implements ActionListener {
 		switch (arg0.getActionCommand()) {
 		case "Start":
 			Main.GameLoop.isPaused = false;
-			ArrangeGui.disableForwardButton();
+			CreateAndArrangeGui.disableForwardButton();
 			break;
 
 		case "Pause":
 			Main.GameLoop.isPaused = true;
-			ArrangeGui.enableForwardButton();
+			CreateAndArrangeGui.enableForwardButton();
 			break;
 		}
 

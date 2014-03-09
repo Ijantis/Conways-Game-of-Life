@@ -3,7 +3,7 @@ package Main;
 import java.awt.Dimension;
 import java.util.Stack;
 
-import Gui.ArrangeGui;
+import Gui.CreateAndArrangeGui;
 import Gui.GuiMain;
 import Map.Cell;
 import Map.Grid;
@@ -12,7 +12,7 @@ public class GameLoop implements Runnable {
 
 	public static boolean isPaused = true;
 	private static Grid currentGrid;
-	private static int speed = 100;
+	private static int updateSpeedMilis = 100;
 	private static Stack<Coordinate> cellsToBeRevived = new Stack<Coordinate>();
 	private static Stack<Coordinate> cellsToBeKilled = new Stack<Coordinate>();
 
@@ -44,7 +44,7 @@ public class GameLoop implements Runnable {
 				calculateCellsToUpdate();
 				updateCells();
 				redrawMap();
-				pauseProgram(speed);
+				pauseProgram(updateSpeedMilis);
 			}
 		}
 
@@ -58,16 +58,6 @@ public class GameLoop implements Runnable {
 
 	}
 
-	/*
-	 * For a space that is 'populated': Each cell with one or no neighbors dies,
-	 * as if by loneliness. Each cell with four or more neighbors dies, as if by
-	 * overpopulation. Each cell with two or three neighbors survives. For a
-	 * space that is 'empty' or 'unpopulated' Each cell with three neighbors
-	 * becomes populated.
-	 */
-	/**
-	 * 
-	 */
 	private static void calculateCellsToUpdate() {
 
 		int value;
@@ -108,8 +98,7 @@ public class GameLoop implements Runnable {
 
 	}
 
-	// TODO This method counts the cell being checked as a neighbour. OPTIMISE
-	// IT
+	//TODO: Optimise it at some point
 	private static int calculateLiveNeighbours(int xCoord, int yCoord) {
 		int neighbours = 0;
 
@@ -143,10 +132,10 @@ public class GameLoop implements Runnable {
 
 	public static void incrementSimulationSpeed(int speedIncrement) {
 
-		if (!(speed + speedIncrement < 10 || speed + speedIncrement > 200)) {
+		if (!(updateSpeedMilis + speedIncrement < 10 || updateSpeedMilis + speedIncrement > 200)) {
 
-			speed += speedIncrement;
-			ArrangeGui.setSpeed(speed);
+			updateSpeedMilis += speedIncrement;
+			CreateAndArrangeGui.setSpeed(updateSpeedMilis);
 		}
 
 	}
