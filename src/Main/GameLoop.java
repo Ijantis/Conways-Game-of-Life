@@ -21,11 +21,19 @@ public class GameLoop implements Runnable {
 		currentGrid = Grid.getInstance();
 		currentGrid.initialise(new Dimension(200, 200));
 
-		currentGrid.setCellValue(100, 100, Cell.Alive);
-		currentGrid.setCellValue(101, 101, Cell.Alive);
-		currentGrid.setCellValue(101, 102, Cell.Alive);
-		currentGrid.setCellValue(100, 101, Cell.Alive);
-		currentGrid.setCellValue(99, 101, Cell.Alive);
+		// currentGrid.setCellValue(100, 100, Cell.Alive);
+		// currentGrid.setCellValue(101, 101, Cell.Alive);
+		// currentGrid.setCellValue(101, 102, Cell.Alive);
+		// currentGrid.setCellValue(100, 101, Cell.Alive);
+		// currentGrid.setCellValue(99, 101, Cell.Alive);
+
+		for (int x = 50; x < 150; x++) {
+			currentGrid.setCellValue(x, 100, Cell.Alive);
+			currentGrid.setCellValue(x, 120, Cell.Alive);
+			currentGrid.setCellValue(x, 110, Cell.Alive);
+			currentGrid.setCellValue(x, 80, Cell.Alive);
+			currentGrid.setCellValue(x, 90, Cell.Alive);
+		}
 
 		new GuiMain(currentGrid);
 
@@ -98,7 +106,7 @@ public class GameLoop implements Runnable {
 
 	}
 
-	//TODO: Optimise it at some point
+	// TODO: Optimise it at some point
 	private static int calculateLiveNeighbours(int xCoord, int yCoord) {
 		int neighbours = 0;
 
@@ -132,7 +140,8 @@ public class GameLoop implements Runnable {
 
 	public static void incrementSimulationSpeed(int speedIncrement) {
 
-		if (!(updateSpeedMilis + speedIncrement < 10 || updateSpeedMilis + speedIncrement > 200)) {
+		if (!(updateSpeedMilis + speedIncrement < 10 || updateSpeedMilis
+				+ speedIncrement > 200)) {
 
 			updateSpeedMilis += speedIncrement;
 			CreateAndArrangeGui.setSpeed(updateSpeedMilis);
